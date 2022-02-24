@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+        <button onclick="location.href='http://127.0.0.1:5500/index.html';" value="Home">Home</button>
+    </div>
+    <script>
+        let form = document.getElementById('formulario');
+        form.addEventListener("submit", function (evento) {
+            evento.preventDefault(); //Para evitar que lo envie automaticamente
+            let regexgood = 0;
+            let regexNombre = /^[a-zA-Z\s]+$/;
+            let regexAsunto = /^[a-zA-Z\s]+$/;
+            let regexMensaje = /^[a-zA-Z\s]+$/;
+
+            if (evento.target.nombre.value !== '' && regexNombre.test(evento.target.nombre.value)) {
+                regexgood = regexgood + 1; //Contador para saber cuando hacer sumit
+                let smallTagNombre = document.querySelector(".errorNombre");
+                smallTagNombre.innerHTML = ""; //Para borrar small al rescribir value valido
+            } else {
+                let smallTagNombre = document.querySelector(".errorNombre");
+                smallTagNombre.innerHTML = "Ingresar un nombre valido"; //Para indicar value incorrecto debajo del imput
+            }
+
+            if (evento.target.asunto.value !== '' && regexAsunto.test(evento.target.asunto.value)) {
+                regexgood = regexgood + 1; //Contador para saber cuando hacer sumit
+                let smallTagAsunto = document.querySelector(".errorAsunto");
+                smallTagAsunto.innerHTML = ""; //Para borrar small al rescribir value valido
+            } else {
+                let smallTagAsunto = document.querySelector(".errorAsunto");
+                smallTagAsunto.innerHTML = "Ingresar un asunto valido"; //Para indicar value incorrecto debajo del imput
+            }
+
+            if (evento.target.mensaje.value !== '' && regexMensaje.test(evento.target.mensaje.value)) {
+                regexgood = regexgood + 1; //Contador para saber cuando hacer sumit
+                let smallTagMensaje = document.querySelector(".errorMensaje");
+                smallTagMensaje.innerHTML = ""; //Para borrar small al rescribir value valido
+            } else {
+                let smallTagMensaje = document.querySelector(".errorMensaje");
+                smallTagMensaje.innerHTML = "Ingresar un mensaje valido"; //Para indicar value incorrecto debajo del imput
+            }
+
+            if (regexgood === 3) {
+                evento.target.submit(); //Para hacer el submit
+                let alertrow = document.querySelector('.resultado'); //Para cuadro de alerta
+                alertrow.innerHTML = '<span>mensaje enviado!!!</span>';
+            } else {
+                
+            }
+        })
+    </script>
+
+</body>
+
+</html>
