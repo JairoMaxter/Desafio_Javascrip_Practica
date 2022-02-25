@@ -36,46 +36,64 @@
         <button onclick="location.href='http://127.0.0.1:5500/index.html';" value="Home">Home</button>
     </div>
     <script>
-        //VAriables
+        //Variables
         let selectores = [".resultado", "#valor1", "#valor2", "#btn-sumar", "#btn-restar"]
 
         let resultadoOperacion = document.querySelector(selectores[0]);
-        let valor1 = document.querySelector(selectores[1]).value;
-        let valor2 = document.querySelector(selectores[2]).value;
         let suma = document.querySelector(selectores[3]);
         let resta = document.querySelector(selectores[4]);
-        let result = 0;  
+        let result = 0;
 
-        if (valor1.match(/^[0-9 ]+$/) && valor2.match(/^[0-9 ]+$/) && valor1 != null && valor2 != null) {
+        //suma
+        suma.addEventListener('click', function () {
 
-            //suma
-            suma.addEventListener('click', function () {
-                result = parseInt(valor1) + parseInt(valor2);
-                resultadoOperacion.innerHTML = `La suma de los números ingresados es: ${result}`;
-                console.log(valor1 + typeof (valor1))
-                console.log(valor2 + typeof (valor2))
-                console.log(result + typeof (result))
-            });
+            let valor1s = document.querySelector(selectores[1]).value;
+            let valor2s = document.querySelector(selectores[2]).value;
 
-            //Restar
-            resta.addEventListener('click', function () {
-                result = parseInt(valor1) - parseInt(valor2);
+            if (isValid(valor1s) && isValid(valor2s)) {
 
-                if (isValid(valor1) && isValid(valor2)) {
-                    if (result < 0) {
-                        resultadoOperacion.innerHTML = " es 0";
-                    } else {
-                        resultadoOperacion.innerHTML = `La resta de los números ingresados es: ${result}`;
-                    }
+                result = parseInt(valor1s) + parseInt(valor2s);
+                resultadoOperacion.innerHTML = `La suma es: ${result}`;
+
+            } else {
+
+                alert("Solo son permitido números, por favor revisa la informacion entregada");
+
+            }
+
+            console.log(valor1 + typeof (valor1s))
+            console.log(valor2 + typeof (valor2s))
+            console.log(result + typeof (result))
+        });
+
+        //Restar
+        resta.addEventListener('click', function () {
+
+            let valor1r = document.querySelector(selectores[1]).value;
+            let valor2r = document.querySelector(selectores[2]).value;
+
+            if (isValid(valor1r) && isValid(valor2r)) {
+
+                result = parseInt(valor1r) - parseInt(valor2r);
+
+                if (result < 0) {
+
+                    resultadoOperacion.innerHTML = " es 0";
+
                 } else {
-                    alert("Solo son permitido números, por favor revisa la informacion entregada");
+
+                    resultadoOperacion.innerHTML = `La resta es: ${result}`;
+
                 }
-            });
+            } else {
 
-        } else {
+                alert("Solo son permitido números, por favor revisa la informacion entregada");
 
-            alert("Solo son permitido números, por favor revisa la informacion entregada");
-            
+            }
+        });
+
+        function isValid(word) {
+            return word.match(/^[0-9 ]+$/) != null;
         }
 
     </script>
